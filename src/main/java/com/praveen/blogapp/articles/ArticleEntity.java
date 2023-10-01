@@ -15,6 +15,8 @@ import java.util.Date;
 @ToString
 @RequiredArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Builder
 public class ArticleEntity {
 
     @Id

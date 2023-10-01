@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ArticlesRepository extends JpaRepository<ArticleEntity, Long> {
+
+    Object findBySlug(String slug);
 }
