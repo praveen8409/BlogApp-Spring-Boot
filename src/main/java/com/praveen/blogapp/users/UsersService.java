@@ -1,6 +1,7 @@
 package com.praveen.blogapp.users;
 
 import com.praveen.blogapp.users.dtos.CreateUserRequest;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -9,17 +10,21 @@ import java.util.Optional;
 public class UsersService {
 
     private final UsersRepository usersRepository;
-
-   public UsersService(UsersRepository usersRepository) {
+    private final ModelMapper modelMapper;
+   public UsersService(UsersRepository usersRepository, ModelMapper modelMapper) {
        this.usersRepository = usersRepository;
+       this.modelMapper = modelMapper;
    }
 
    public UserEntity createUser(CreateUserRequest u) {
-          var newUser = UserEntity.builder()
-                  .username(u.getUsername())
-                  //.password(password)
-                  .email(u.getEmail())
-                    .build();
+       UserEntity newUser = modelMapper.map(u, UserEntity.class);
+       // TODO Create user and Encrypt it
+
+//          var newUser = UserEntity.builder()
+//                  .username(u.getUsername())
+//                  .password(u.getPassword())
+//                  .email(u.getEmail())
+//                    .build();
             return usersRepository.save(newUser);
    }
 
